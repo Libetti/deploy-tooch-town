@@ -1,8 +1,6 @@
 name: Deploy tooch-town stack
 
 on:
-  repository_dispatch:
-    types: [deploy-tooch-town]
   workflow_dispatch:
 
 jobs:
