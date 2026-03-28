@@ -11,6 +11,8 @@ services:
   tooch-town:
     image: libetti/tooch-town:latest
     container_name: tooch-town
+    environment:
+      - LIGHTNING_API_BASE_URL=http://lightning-rod:8000
     ports:
       - "3000:3000"
     depends_on:
