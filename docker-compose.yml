@@ -1,0 +1,28 @@
+services:
+  lightning-rod:
+    image: libetti/lightning-rod:latest
+    container_name: lightning-rod
+    expose:
+      - "8000"
+    networks:
+      - backend
+    restart: unless-stopped
+
+  tooch-town:
+    image: libetti/tooch-town:latest
+    container_name: tooch-town
+    ports:
+      - "3000:3000"
+    depends_on:
+      - lightning-rod
+    networks:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    internal: true
