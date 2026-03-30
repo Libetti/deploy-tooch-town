@@ -10,10 +10,14 @@ jobs:
     steps:
       - name: SSH into server and deploy stack
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_TOKEN: ${{ secrets.$DOCKER_HUB_TOKEN }}
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          envs: DOCKER_HUB_USERNAME,DOCKER_HUB_TOKEN
           script: |
             echo "$DOCKER_HUB_TOKEN" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
             cd /home/libetti/deploy-tooch-town
