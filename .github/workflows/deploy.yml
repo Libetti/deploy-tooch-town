@@ -20,7 +20,7 @@ jobs:
           envs: DOCKER_HUB_USERNAME,DOCKER_HUB_TOKEN
           script: |
             docker logout || true
-            echo "$REGISTRY_TOKEN" | docker login -u "$REGISTRY_USERNAME" --password-stdin
+            echo "$DOCKER_HUB_TOKEN" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
             cd /home/libetti/deploy-tooch-town
             docker compose pull
             docker compose up -d
