@@ -4,9 +4,6 @@ services:
     container_name: lightning-rod
     expose:
       - "8000"
-    dns:
-      - ${DOCKER_DNS_1:-1.1.1.1}
-      - ${DOCKER_DNS_2:-8.8.8.8}
     networks:
       - backend
     restart: unless-stopped
@@ -18,9 +15,6 @@ services:
       - LIGHTNING_API_BASE_URL=http://lightning-rod:8000
     ports:
       - "3000:3000"
-    dns:
-      - ${DOCKER_DNS_1:-1.1.1.1}
-      - ${DOCKER_DNS_2:-8.8.8.8}
     depends_on:
       - lightning-rod
     networks:
