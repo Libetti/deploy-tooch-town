@@ -22,6 +22,7 @@ jobs:
             echo "$DOCKER_HUB_TOKEN" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
             cd /home/libetti/deploy-tooch-town
             git checkout main
+            git pull origin main
             docker compose pull
             docker compose up -d
             docker image prune -f
