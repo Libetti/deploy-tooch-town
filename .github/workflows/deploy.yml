@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           envs: DOCKER_HUB_USERNAME,DOCKER_HUB_TOKEN
           script: |
-            echo "$DOCKER_HUB_TOKEN" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+            echo "$DOCKER_HUB_TOKEN" | docker login -u $DOCKER_HUB_USERNAME" --password-stdin
             cd /home/libetti/deploy-tooch-town
             git checkout main
             docker compose pull
