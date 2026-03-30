@@ -8,12 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME  }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: SSH into server and deploy stack
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -21,7 +15,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
             cd /home/libetti/deploy-tooch-town
+            git checkout main
             docker compose pull
             docker compose up -d
             docker image prune -f
