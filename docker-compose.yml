@@ -13,6 +13,8 @@ services:
     container_name: tooch-town
     environment:
       - LIGHTNING_API_BASE_URL=http://lightning-rod:8000
+      - SUPABASE_URL: ${SUPABASE_URL}
+      - SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
     ports:
       - "3000:3000"
     depends_on:
