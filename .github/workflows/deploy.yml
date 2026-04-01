@@ -25,6 +25,8 @@ jobs:
             cd /home/libetti/deploy-tooch-town
             git checkout main
             git pull origin main
+            export SUPABASE_URL='${{ secrets.SUPABASE_URL }}'
+            export SUPABASE_ANON_KEY='${{ secrets.SUPABASE_ANON_KEY }}'
             docker compose pull
             docker compose up -d
             docker image prune -f
