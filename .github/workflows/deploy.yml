@@ -27,13 +27,12 @@ jobs:
             cd /home/libetti/deploy-tooch-town
             git checkout main
             git pull origin main
-
-            echo "LOGS_JWT_SECRET=${{ secrets.LOGS_JWT_SECRET }}" > .env
-            echo "LOGS_ADMIN_PASSWORD=${{ secrets.LOGS_ADMIN_PASSWORD }}" > .env
-            echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > .env
-            echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" > .env
-            chmod 600 .env
+            
+            export LOGS_JWT_SECRET='${{ secrets.LOGS_JWT_SECRET }}'
+            export LOGS_ADMIN_PASSWORD='${{ secrets.LOGS_ADMIN_PASSWORD }}'
+            export SUPABASE_URL='${{ secrets.SUPABASE_URL }}'
+            export SUPABASE_ANON_KEY='${{ secrets.SUPABASE_ANON_KEY }}'
 
             docker compose pull
-            docker compose --env-file .env up -d
+            docker compose up -d
             docker image prune -f
