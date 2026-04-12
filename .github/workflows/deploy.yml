@@ -35,5 +35,5 @@ jobs:
             chmod 600 .env
 
             docker compose pull
-            docker compose up -d
+            docker compose --env-file .env up -d
             docker image prune -f
