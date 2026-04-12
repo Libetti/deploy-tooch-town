@@ -2,6 +2,11 @@ services:
   lightning-rod:
     image: libetti/lightning-rod:latest
     container_name: lightning-rod
+    logging:
+      driver: local
+      options:
+        max-size: "40m"
+        max-file: "5"
     expose:
       - "8000"
     networks:
@@ -11,6 +16,11 @@ services:
   tooch-town:
     image: libetti/tooch-town:latest
     container_name: tooch-town
+    logging:
+      driver: local
+      options:
+        max-size: "40m"
+        max-file: "5"
     environment:
       - LIGHTNING_API_BASE_URL=http://lightning-rod:8000
       - SUPABASE_URL=${SUPABASE_URL}
@@ -23,6 +33,26 @@ services:
       - frontend
       - backend
     restart: unless-stopped
+
+    onlogs:
+      image: devforth/onlogs:latest
+      container_name: onlogs
+      environment:
+        - ADMIN_USERNAME=admin
+        - ADMIN_PASSWORD=${LOGS_ADMIN_PASSWORD}
+        - JWT_SECRET=${LOGS_JWT_SECRET}
+        - PORT=8798
+      ports:
+        - "127.0.0.1:8798:8798"
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+        - /var/lib/docker/containers:/var/lib/docker/containers:ro
+        - /etc/hostname:/etc/hostname:ro
+        - onlogs-volume:/leveldb
+      restart: unless-stopped
+
+volumes:
+  onlogs-volume:
 
 networks:
   frontend:
