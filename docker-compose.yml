@@ -34,22 +34,22 @@ services:
       - backend
     restart: unless-stopped
 
-    onlogs:
-      image: devforth/onlogs:latest
-      container_name: onlogs
-      environment:
-        - ADMIN_USERNAME=admin
-        - ADMIN_PASSWORD=${LOGS_ADMIN_PASSWORD}
-        - JWT_SECRET=${LOGS_JWT_SECRET}
-        - PORT=8798
-      ports:
-        - "127.0.0.1:8798:8798"
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-        - /var/lib/docker/containers:/var/lib/docker/containers:ro
-        - /etc/hostname:/etc/hostname:ro
-        - onlogs-volume:/leveldb
-      restart: unless-stopped
+  onlogs:
+    image: devforth/onlogs:latest
+    container_name: onlogs
+    environment:
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=${LOGS_ADMIN_PASSWORD}
+      - JWT_SECRET=${LOGS_JWT_SECRET}
+      - PORT=8798
+    ports:
+      - "127.0.0.1:8798:8798"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /etc/hostname:/etc/hostname:ro
+      - onlogs-volume:/leveldb
+    restart: unless-stopped
 
 volumes:
   onlogs-volume:
