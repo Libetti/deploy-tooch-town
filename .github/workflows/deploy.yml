@@ -16,7 +16,8 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           LOGS_ADMIN_PASSWORD: ${{ secrets.LOGS_ADMIN_PASSWORD }}
-          LOGS_JWT_SECRET: ${{ secrets.LOGS_JWT_SECRET}}
+          LOGS_JWT_SECRET: ${{ secrets.LOGS_JWT_SECRET }}
+          TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
@@ -27,11 +28,9 @@ jobs:
             cd /home/libetti/deploy-tooch-town
             git checkout main
             git pull origin main
-            
+
             export LOGS_JWT_SECRET='${{ secrets.LOGS_JWT_SECRET }}'
             export LOGS_ADMIN_PASSWORD='${{ secrets.LOGS_ADMIN_PASSWORD }}'
-            export SUPABASE_URL='${{ secrets.SUPABASE_URL }}'
-            export SUPABASE_ANON_KEY='${{ secrets.SUPABASE_ANON_KEY }}'
 
             docker compose pull
             docker compose up -d
