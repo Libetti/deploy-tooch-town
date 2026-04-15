@@ -33,6 +33,7 @@ jobs:
             export LOGS_ADMIN_PASSWORD='${{ secrets.LOGS_ADMIN_PASSWORD }}'
             export SUPABASE_URL='${{ secrets.SUPABASE_URL }}'
             export SUPABASE_ANON_KEY='${{ secrets.SUPABASE_ANON_KEY }}'
+            export TURNSTILE_SECRET_KEY='${{ secrets.TURNSTILE_SECRET_KEY }}'
 
             docker compose pull
             docker compose up -d
